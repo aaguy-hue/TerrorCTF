@@ -1,0 +1,38 @@
+Hi! 
+
+Here's the structure:
+- The challenge.toml file contains all information about the challenge
+- This challenge.toml says that:
+  - The solution is dnctf{s4n1ty_ch3ck_2e87s} (where dnctf is case insensitive)
+  - The challenge description is in chall/description.txt
+  - The challenge is worth 100 points
+  - The only file to download is chall/password.txt
+
+- This challenge.toml also says that there is a netcat challenge to run on the server
+  - The directory of the challenge is chall/
+  - Make a name for the service, here it is sanity-check
+  - Choose a port in the format 55XX, here it is 5500
+
+  - This directory should have a Dockerfile
+  - You can copy it in from here in the sample and make necessary modifications
+
+  - In the Dockerfile, make any necessary changes to the environment
+    - The environment uses redpwn/jail, do not change this
+    - SEEEE THEEEEE EXAMPLEESSSS on their github for how to bring in things like python
+      - Basically you either:
+        - import an image with some name, then mount it on /srv
+        - if you simply are running a binary
+    - VERY IMPORTANT:
+      - Your file to run should be COPYied over to /srv/app/run
+      - Put a shebang at the top of your file if it's anything other than a binary
+      - Note that the jail is mounted on /srv and the whole filesystem of the image you copy over, so if you put a shebang, put it as you normally would
+  
+  - Go to the docker-compose.yml file in the root directory
+    - Set up the service for the challenge by copying over something like the sanity check service
+    - Change the name of the service to be the SAME as what you put in challenge.toml
+    - Change build to be the path to the directory with the dockerfile
+    - Change the left port to be the same as what you put in the challenge.toml
+  
+- All other files/directories (such as src/ and this file) are ignored
+
+YOU ARE NOW DONE :)

@@ -1,0 +1,22 @@
+# Contributing
+
+## How to Compile
+To compile, just run the tasks.json task in vscode (`ctrl + shift + b`) or run the commands in the file.
+
+## Prerequisites to Compile
+ - Run this command on debian and its variants (ubuntu, linux mint, etc), idk about other OSes like arch or macos
+   - `sudo apt-get install gcc-multilib g++-multilib`
+   - You just need this to cross-compile to 32-bit
+ - GNU Compiler Collection (contains the `g++` command)
+   - **LINUX**: Comes with most linux distros
+   - **MacOS**: Pretty sure that this is part of TicTacOS (hahahahahahahahahaha funny joke, I think I'm going insane why am I telling myself jokes that no one will ever see or think are funny)
+   - **Windows**: Use WSL, the way the tasks are set up idk if cygwin will work
+
+## Running the Binary
+ - Use a system that supports running ELF
+   - Linux
+ - NOT Windows or MacOS you gooey peeps
+   - Windows uses PE (Physical Education 🤣🤣🤣)
+   - MacOS uses Mach-O although I previously thought it was ELF
+ - Just run `./ac.out` or do `ctrl + shift + p` and then press `Tasks: Run Task`, then press `run`
+
