@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+    ctf-website:
+        build:
+            context: website
+        stop_signal: SIGINT
+        ports:
+            - 8000:8000
+        environment:
+            - DB_SERVER=ctf-postgres
+            - DATABASE_URI=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@ctf-postgres/${POSTGRES_DB}
+            - SECRET_KEY=${SITE_SECRET_KEY}
+        links:
+            - ctf-postgres
+    
+    ctf-postgres:
+        image: "postgres:9.6-alpine"
+        container_name: ctf-postgres
+        volumes:
+            - ctf-data:/var/lib/postgresql/data
+        ports:
+            - 5432:5432
+        environment:
+            - POSTGRES_DB=${POSTGRES_DB}
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            - LANG=en_US.utf8
+            - LC_ALL=en_US.utf8
+
+    # chall-sanitycheck-nc:
+    #     build: ./problems/misc/sample/chall/nc_chall
+    #     ports:
+    #         - 5500:5000
+    #     privileged: true
+    # chall_sanity-check_web:
+    #     build: ./problems/misc/sample/chall/web_chall
+    #     ports:
+    #         - 80:80
+    #     privileged: true
+    # chall-ac-nc:
+    #     build: ./problems/rev/ac/chall
+    #     ports:
+    #         - 5501:5000
+    #     privileged: true
+    # chall-gophergame-nc:
+    #     build: ./problems/rev/gophergame
+    #     ports:
+    #         - 5502:5000
+    #     privileged: true
+
+volumes:
+    ctf-data:
+        driver: local

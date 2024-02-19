@@ -1,0 +1,18 @@
+# Category is already implied by the folder it's in
+
+[challenge] # this section has details about the challenge for the website
+title = "Sanity Check"
+description = "chall/description.txt" # keep readme as txt
+flag = "^(?i)dnctf(?-i){s4n1ty_ch3ck_2e87s}$" # PROVIDE REGEX
+points = 100 # SPECIFY THE NUMBER OF POINTS HERE
+
+[download] # this section has information about files that need to be downloaded
+files = [ "chall/password.txt" ]
+
+[server] 
+# this section specifies information about anything that needs to run on the server (i.e. netcat and website)
+# note: # of cpus will be limited to 1 on server
+
+[server.netcat] # the netcat server
+service_name = "sanity-check" # this should be the same as what's in docker-compose.yml
+service_port = 5500

@@ -1,0 +1,5 @@
+Are you a robot? Check with this challenge.
+Open the website and enter in the password to get a key. Then, connect with netcat to the server and type in the key.
+
+The password is in the attached file.
+Access the challenge with the information below.

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Account{% endblock %}
+
+{% block content %}
+    <h1>Account Details</h1>
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-danger">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <p>Username: {{ username }}</p>
+    {% if has_team %}
+        <p>Team: {{ team_name }}</p>
+        <p>Shareable Team ID: <span id="shareable-team-id">{{ team_shareable_id }}</span></p>
+        <button class="btn btn-secondary" type="button" onclick="copyIDToClipboard()">Copy to Clipboard</button>
+        <p>Team Members:</p>
+        <ul>
+            {% for member in team_members %}
+                <li>{{ member }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#makeATeam">Create a Team</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#joinATeam">Join a Team</button>
+    {% endif %}
+
+{% endblock %}
+
+
+
+{% block modals %}
+    <!-- Making a Team Modal -->
+    <div class="modal fade" id="makeATeam" tabindex="-1" role="dialog" aria-labelledby="makeATeamLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="makeATeamLabel">Make a Team</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ url_for('auth.create_team') }}" method="post">
+                        <label for="team_name">Team Name:</label>
+                        <input type="text" name="team_name" id="team_name" class="form-control">
+                        
+                        <input type="submit" value="Create the Team!" class="btn btn-success">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Joining a Team Modal -->
+    <div class="modal fade" id="joinATeam" tabindex="-1" role="dialog" aria-labelledby="joinATeamLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="joinATeamLabel">Join a Team</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ url_for('auth.join_team') }}" method="post">
+                        <label for="team_shareable_id">Team Shareable ID:</label>
+                        <input type="text" name="team_shareable_id" id="team_shareable_id" class="form-control">
+
+                        <input type="submit" value="Join the Team!" class="btn btn-success">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+<script>
+    function copyIDToClipboard() {
+        // Get the text field
+        var copyText = document.getElementById("shareable-team-id");
+
+            // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText.innerText);
+
+        // Alert the copied text
+        alert("Copied the id");
+    }
+</script>
+{% endblock %}

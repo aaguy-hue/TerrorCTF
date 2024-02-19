@@ -1,0 +1,13 @@
+[challenge]
+title = "PumpkinPy!"
+description = "Ahh yes. Pumpkin Py. Do you know how to bake the best Py?"
+flag = "^(?i)dnctf(?-i){7he_R3al_Cyb3rCh3f!948378200}$"
+points = 400
+
+[download]
+files = [ "pumpkin.py" ]
+
+[server]
+[[server.netcat]]
+service_name = "pumpkin"
+service_port = 5509

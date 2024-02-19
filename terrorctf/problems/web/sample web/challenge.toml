@@ -1,0 +1,13 @@
+[challenge]
+title = "4n1m4l Cr0ss1ng"
+description = "chall/description.txt"
+flag = "^(?i)dnctf(?-i){4n1m4l_cr0ss1ng_1s_th3_b3st_g4m3_96024}$"
+points = 400
+
+[download]
+files = [ "chall/ac" ]
+
+[server]
+[server.netcat]
+service_name = "ac"
+service_port = 5501

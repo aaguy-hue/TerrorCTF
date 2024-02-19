@@ -1,0 +1,15 @@
+# Category is already implied by the folder it's in
+
+[challenge]
+title = "GOpherGame"
+description = "description.txt" # NEEDS TO BE ADDED BY SHUBAN
+flag = "^(?i)dnctf(?-i){5h1ny_R4yqu4za!098327893}$"
+points = 400
+
+[download]
+files = [ "game.go" ]
+
+[server]
+[[server.netcat]]
+service_name = "gophergame"
+service_port = 5502
